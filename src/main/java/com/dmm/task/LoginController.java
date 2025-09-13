@@ -37,4 +37,3 @@ public class LoginController {
         return "calendar";
 	} 
 	
-	

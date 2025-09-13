@@ -1,4 +1,4 @@
-package com.example.task.config;
+package com.dmm.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,15 +13,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.task.service.AccountUserDetailsService;
 
-@Configuration // 設定を行うクラスであることを指定
-@EnableWebSecurity // Spring Securityを利用することを指定
-@EnableGlobalMethodSecurity(prePostEnabled = true) // 追記 メソッド認可処理を有効化
+@Configuration 
+@EnableWebSecurity 
+@EnableGlobalMethodSecurity(prePostEnabled = true) 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AccountUserDetailsService userDetailsService;
 
 	public PasswordEncoder passwordEncoder() {
-		// BCryptアルゴリズムを使用してパスワードのハッシュ化を行う
+		
 		return new BCryptPasswordEncoder();
 	}
 
