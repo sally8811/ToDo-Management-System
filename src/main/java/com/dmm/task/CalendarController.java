@@ -61,7 +61,8 @@ public class CalendarController {
 	            
 	   
 
-	        return "home";
+	        
 	        }
+	        return "home";
 	 }
 }

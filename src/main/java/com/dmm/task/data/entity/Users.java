@@ -1,18 +1,18 @@
 package com.dmm.task.data.entity;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import lombok.Data;
+import lombok.ToString;
 
-import com.dmm.task.data.entity.Users;
-
-public interface UsersRepository extends JpaRepository<Users, String> {
-	@Query("select a from Tasks a where a.date between :from and :to and name = :name")
-	List<Tasks> findByDateBetween(@Param("from") LocalDateTime from, @Param("to") LocalDateTime to, @Param("name") String name);
-	
-
-
+@Data
+@Entity
+@ToString(exclude = "password") // 自動生成されるtoStringにpasswordを出力しない
+public class Users {
+	@Id
+	public String userName;
+	public String password;
+	public String name;
+	public String roleName;
 }
