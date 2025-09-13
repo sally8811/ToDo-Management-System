@@ -1,12 +1,13 @@
-package com.example.task.data.repository;
+package com.dmm.task.data.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.example.task.data.entity.Users;
+import com.dmm.task.data.entity.Users;
 
 public interface UsersRepository extends JpaRepository<Users, String> {
 	@Query("select a from Tasks a where a.date between :from and :to and name = :name")

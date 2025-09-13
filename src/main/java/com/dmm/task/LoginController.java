@@ -1,4 +1,4 @@
-package com.example.task;
+package com.dmm.task;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +9,7 @@ public class LoginController {
 	String loginForm() {
 		return "login";
 	}
+}
 	
 	
 	

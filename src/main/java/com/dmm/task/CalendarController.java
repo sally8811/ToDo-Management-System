@@ -1,11 +1,10 @@
 package com.dmm.task;
 
-import java.security.Principal;
-import java.time.LocalDateTime;
-import java.time.YearMonth;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.scheduling.config.Task;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 public class CalendarController {
@@ -21,13 +20,14 @@ public class CalendarController {
 	        
 		DayOfWeek w = d.getDayOfWeek();
 	        
-		int dayValue = dayOfWeek.getValue();
-        LocalDate previousDate = firstDayOfMonth.minusDays(dayValue);    
+		int dayValue = w.getValue();
+		
+        LocalDate previousDate = d.minusDays(dayValue);    
 	
 	   
 
 	        for (int i = 0; i < 7; i++) {
-	            weekDates.add(startDate.plusDays(i));
+	            weekDates.add(d.plusDays(i));
 	            
 	            if (weekDates.size() == 7) {
 	                month.add(weekDates);
@@ -35,9 +35,9 @@ public class CalendarController {
 	            }
 	            
 	            for (int i = 0; i < 7; i++) {
-		            weekDates.add(startDate.plusDays(i));
+		            weekDates.add(d.plusDays(i));
 	              
-	                if (firstDayOfMonth.getDayOfWeek() == dayOfWeek.SATURDAY) {
+	                if (.getValue() == DayOfWeek.SATURDAY) {
 	                    month.add(weekDates);
 	                    weekDates = new ArrayList<>();
 	                }
@@ -45,7 +45,7 @@ public class CalendarController {
 	         
 	            if (!weekDates.isEmpty()) {
 	                int lastDow = lastDay.getDayOfWeek().getValue(); 
-	                int pad = (dayOfWeek.SATURDAY.getValue() - lastDow + 7) % 7; 
+	                int pad = (w.SATURDAY.getValue() - lastDow + 7) % 7; 
 
 	                for (int i = 1; i <= pad; i++) {
 	                    weekDates.add(lastDay.plusDays(i)); 
@@ -55,17 +55,8 @@ public class CalendarController {
 	            }  
 	        
 	            
-	            
-	            for (int i = 1; i <= lastDay; i++) {
-	    			// 曜日を取得
-	    			DayOfWeek w = d.getDayOfWeek();
-	    			weekDates.add(d.plusDays(i));
-	    			// 土曜日かどうかを判定
-	    			if (w == DayOfWeek.SATURDAY) {
-	    				month.add(weekDates);
-	                    weekDates = new ArrayList<>();
-	    			}
+	   
 
-	    			d = d.plusDays(1);
-
-}
+	            }
+	        }
+	}

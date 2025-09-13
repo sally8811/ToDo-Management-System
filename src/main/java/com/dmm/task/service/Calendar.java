@@ -1,4 +1,4 @@
-package com.dm.task.service;
+package com.dmm.task.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,14 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import com.example.task.data.repository.UsersRepository;
-
 @Service
 public class Calendar {
 
     private final UsersRepository usersRepository;
 
-    public TaskCalendarService(UsersRepository usersRepository) {
+    public Calendar(UsersRepository usersRepository) {
         this.taskRepository = taskRepository;
     }
 
