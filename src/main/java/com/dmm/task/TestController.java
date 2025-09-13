@@ -1,29 +1,41 @@
 package com.dmm.task;
 
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class TestController {
+@RequestMapping("/tasks")
+public class TaskController {
 
-	@RequestMapping("/testcreate")
-	public String index() {
-		return "create";
-	}
+    private final TaskService taskService;
 
-	@RequestMapping("/testedit")
-	public String test() {
-		return "edit";
-	}
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
-	@RequestMapping("/testmain")
-	public String main() {
-		return "main";
-	}
+    // タスク新規作成
+    @PostMapping("/create")
+    public String createTask(@ModelAttribute Task task) {
+        taskService.save(task);
+        // PRGパターン: リダイレクトで一覧に戻す
+        return "redirect:/tasks";
+    }
 
-	@RequestMapping("/testlogin")
-	public String login() {
-		return "login";
-	}
+    // タスク編集
+    @PostMapping("/update/{id}")
+    public String updateTask(@PathVariable Long id, @ModelAttribute Task task) {
+        taskService.update(id, task);
+        return "redirect:/tasks";
+    }
 
+    // タスク削除
+    @PostMapping("/delete/{id}")
+    public String deleteTask(@PathVariable Long id) {
+        taskService.delete(id);
+        return "redirect:/tasks";
+    }
 }
