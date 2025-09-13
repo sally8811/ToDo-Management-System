@@ -5,12 +5,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Controller
 public class CalendarController {
 	
 	@GetMapping("/home")
-	public String main() {
+	public String home() {
 		
 		List<List<LocalDate>> month = new ArrayList<>();
 		
@@ -34,29 +36,32 @@ public class CalendarController {
 	                weekDates = new ArrayList<>(); 
 	            }
 	            
-	            for (int i = 0; i < 7; i++) {
-		            weekDates.add(d.plusDays(i));
+	            for (int l = 0; l < 7; l++) {
+		            weekDates.add(d.plusDays(l));
 	              
-	                if (.getValue() == DayOfWeek.SATURDAY) {
+	                if (d.getDayOfWeek() == DayOfWeek.SATURDAY) {
 	                    month.add(weekDates);
 	                    weekDates = new ArrayList<>();
 	                }
 	            }
 	         
 	            if (!weekDates.isEmpty()) {
+	               
+	                LocalDate lastDay = weekDates.get(weekDates.size() - 1);
 	                int lastDow = lastDay.getDayOfWeek().getValue(); 
-	                int pad = (w.SATURDAY.getValue() - lastDow + 7) % 7; 
 
-	                for (int i = 1; i <= pad; i++) {
-	                    weekDates.add(lastDay.plusDays(i)); 
+	                int pad = (DayOfWeek.SATURDAY.getValue() - lastDow + 7) % 7;
+
+	                for (int n = 1; n <= pad; n++) {
+	                    weekDates.add(lastDay.plusDays(n));
 	                }
-
 	                month.add(weekDates);
-	            }  
+	            }
 	        
 	            
 	   
 
-	            }
+	        return "home";
 	        }
-	}
+	 }
+}
