@@ -14,18 +14,15 @@ public class CalendarController {
 	public String main() {
 		
 		List<List<LocalDate>> month = new ArrayList<>();
+		
+		List<LocalDate> weekDates = new ArrayList<>();
 
-	    LocalDate startDate = LocalDate.now();
-
-        List<LocalDate> weekDates = new ArrayList<>();
-
-	     
-	        LocalDate firstDay = today.withDayOfMonth(1);
+		LocalDate d = LocalDate.now().withDayOfMonth(1);
 	        
-	        DayOfWeek dayOfWeek = firstDayOfMonth.getDayOfWeek();
+		DayOfWeek w = d.getDayOfWeek();
 	        
-	        int dayValue = dayOfWeek.getValue();
-	        LocalDate previousDate = firstDayOfMonth.minusDays(dayValue);
+		int dayValue = dayOfWeek.getValue();
+        LocalDate previousDate = firstDayOfMonth.minusDays(dayValue);    
 	
 	   
 
@@ -57,5 +54,18 @@ public class CalendarController {
 	                month.add(weekDates);
 	            }  
 	        
+	            
+	            
+	            for (int i = 1; i <= lastDay; i++) {
+	    			// 曜日を取得
+	    			DayOfWeek w = d.getDayOfWeek();
+	    			weekDates.add(d.plusDays(i));
+	    			// 土曜日かどうかを判定
+	    			if (w == DayOfWeek.SATURDAY) {
+	    				month.add(weekDates);
+	                    weekDates = new ArrayList<>();
+	    			}
+
+	    			d = d.plusDays(1);
 
 }
